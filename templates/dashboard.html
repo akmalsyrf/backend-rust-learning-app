@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Rust Learning Admin{% endblock %}
+
+{% block content %}
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900">Dashboard</h1>
+    <p class="text-gray-600">Welcome to the Rust Learning App admin panel</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-2 bg-blue-100 rounded-lg">
+                <i class="fas fa-book text-blue-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+                <h3 class="text-lg font-semibold text-gray-900">Topics</h3>
+                <p class="text-2xl font-bold text-blue-600">{{ stats.topics_count }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-2 bg-green-100 rounded-lg">
+                <i class="fas fa-list text-green-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+                <h3 class="text-lg font-semibold text-gray-900">Lessons</h3>
+                <p class="text-2xl font-bold text-green-600">{{ stats.lessons_count }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-2 bg-yellow-100 rounded-lg">
+                <i class="fas fa-question-circle text-yellow-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+                <h3 class="text-lg font-semibold text-gray-900">Questions</h3>
+                <p class="text-2xl font-bold text-yellow-600">{{ stats.questions_count }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-2 bg-purple-100 rounded-lg">
+                <i class="fas fa-users text-purple-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+                <h3 class="text-lg font-semibold text-gray-900">Users</h3>
+                <p class="text-2xl font-bold text-purple-600">{{ stats.users_count }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div class="bg-white rounded-lg shadow">
+        <div class="px-6 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900">Recent Activity</h3>
+        </div>
+        <div class="p-6">
+            <div class="space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <p class="text-sm text-gray-600">New user registered: john@example.com</p>
+                    <span class="text-xs text-gray-400">2 minutes ago</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                    <p class="text-sm text-gray-600">New topic created: "Advanced Rust Concepts"</p>
+                    <span class="text-xs text-gray-400">1 hour ago</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                    <p class="text-sm text-gray-600">Question updated: "What is ownership in Rust?"</p>
+                    <span class="text-xs text-gray-400">3 hours ago</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow">
+        <div class="px-6 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900">Quick Actions</h3>
+        </div>
+        <div class="p-6">
+            <div class="space-y-3">
+                <a href="/admin/topics/new" class="block w-full bg-blue-600 text-white text-center py-2 px-4 rounded-md hover:bg-blue-700 transition">
+                    <i class="fas fa-plus mr-2"></i>Create New Topic
+                </a>
+                <a href="/admin/lessons/new" class="block w-full bg-green-600 text-white text-center py-2 px-4 rounded-md hover:bg-green-700 transition">
+                    <i class="fas fa-plus mr-2"></i>Create New Lesson
+                </a>
+                <a href="/admin/questions/new" class="block w-full bg-yellow-600 text-white text-center py-2 px-4 rounded-md hover:bg-yellow-700 transition">
+                    <i class="fas fa-plus mr-2"></i>Create New Question
+                </a>
+                <a href="/admin/code-practices/new" class="block w-full bg-purple-600 text-white text-center py-2 px-4 rounded-md hover:bg-purple-700 transition">
+                    <i class="fas fa-plus mr-2"></i>Create New Code Practice
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+[package]
+name = "rust-learning-backend"
+version = "0.1.0"
+edition = "2021"
+
+[lints.rust]
+unused-imports = "warn"
+unused-variables = "warn"
+unused-mut = "warn"
+dead-code = "warn"
+
+[lints.clippy]
+uninlined-format-args = "warn"
+useless-format = "warn"
+format-in-format-args = "warn"
+excessive-nesting = "warn"
+
+[dependencies]
+# Web framework
+axum = { version = "0.7", features = ["macros", "multipart"] }
+tokio = { version = "1.0", features = ["full"] }
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+hyper = { version = "1.0", features = ["full"] }
+
+# Template engine
+askama = { version = "0.12", features = ["with-axum"] }
+
+# Database
+sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "chrono", "uuid", "json"] }
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1.0", features = ["v4", "serde"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Authentication
+jsonwebtoken = "9.0"
+argon2 = "0.5"
+base64 = "0.21"
+
+# Validation
+validator = { version = "0.16", features = ["derive"] }
+
+# Error handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Configuration
+config = "0.14"
+dotenvy = "0.15"
+
+# Utilities
+futures = "0.3"
+async-trait = "0.1"
+
+# HTTP client for external APIs
+reqwest = { version = "0.11", features = ["json"] }
+
+# Email
+lettre = { version = "0.11", features = ["tokio1-native-tls"] }
+
+[dev-dependencies]
+tokio-test = "0.4"
+mockall = "0.12"

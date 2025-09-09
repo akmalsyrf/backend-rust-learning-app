@@ -1,0 +1,45 @@
+# Clippy configuration for Rust Learning Backend
+
+# Allow some lints that are too strict for this project
+allow-dbg-in-tests = true
+allow-expect-in-tests = true
+allow-unwrap-in-tests = true
+allow-panic-in-tests = true
+allow-print-in-tests = true
+
+# Allow some specific lints
+allow-comparison-to-zero = true
+allow-indexing-slicing-in-tests = true
+allow-mixed-uninlined-format-args = true
+allow-one-hash-in-raw-strings = true
+allow-private-module-inception = true
+allow-useless-vec-in-tests = true
+
+# Thresholds
+too-many-arguments-threshold = 10
+too-many-lines-threshold = 300
+cognitive-complexity-threshold = 50
+type-complexity-threshold = 400
+single-char-binding-names-threshold = 6
+min-ident-chars-threshold = 1
+enum-variant-name-threshold = 2
+struct-field-name-threshold = 2
+max-fn-params-bools = 5
+max-struct-bools = 5
+max-trait-bounds = 8
+max-include-file-size = 2000
+max-suggested-slice-pattern-length = 6
+array-size-threshold = 32
+vec-box-size-threshold = 8192
+trivial-copy-size-limit = 512
+large-error-threshold = 400
+unnecessary-box-size = 256
+pass-by-value-size-limit = 512
+too-large-for-stack = 512
+stack-size-threshold = 2097152
+verbose-bit-mask-threshold = 6
+literal-representation-threshold = 20
+unreadable-literal-lint-fractions = true
+excessive-nesting-threshold = 6
+future-size-threshold = 256
+await-holding-invalid-types = ["std::sync::Mutex", "std::sync::RwLock"]

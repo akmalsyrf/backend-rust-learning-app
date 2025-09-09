@@ -1,0 +1,38 @@
+# Rustfmt configuration for Rust Learning Backend
+
+# Basic formatting
+edition = "2021"
+max_width = 100
+tab_spaces = 4
+newline_style = "Unix"
+
+# Imports
+imports_granularity = "Crate"
+group_imports = "StdExternalCrate"
+reorder_imports = true
+
+# Functions
+fn_args_layout = "Tall"
+fn_params_layout = "Tall"
+brace_style = "SameLineWhere"
+
+# Control flow
+control_brace_style = "AlwaysSameLine"
+match_arm_blocks = true
+match_arm_leading_pipes = "Never"
+
+# Comments and documentation
+comment_width = 80
+wrap_comments = true
+normalize_comments = true
+normalize_doc_attributes = true
+
+# Other
+use_field_init_shorthand = true
+use_try_shorthand = true
+force_explicit_abi = true
+empty_item_single_line = true
+struct_lit_single_line = true
+fn_single_line = true
+where_single_line = true
+indent_style = "Block"

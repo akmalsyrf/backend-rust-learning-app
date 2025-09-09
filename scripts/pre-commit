@@ -1,0 +1,98 @@
+#!/bin/bash
+
+# Pre-commit hook for Rust Learning Backend
+# This script runs before each commit to ensure code quality
+
+set -e
+
+echo "🔍 Running pre-commit checks..."
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Function to print colored output
+print_status() {
+    echo -e "${GREEN}✓${NC} $1"
+}
+
+print_warning() {
+    echo -e "${YELLOW}⚠${NC} $1"
+}
+
+print_error() {
+    echo -e "${RED}✗${NC} $1"
+}
+
+# Check if we're in the right directory
+if [ ! -f "Cargo.toml" ]; then
+    print_error "Not in a Rust project directory. Please run this from the backend directory."
+    exit 1
+fi
+
+# Check if cargo is available
+if ! command -v cargo &> /dev/null; then
+    print_error "Cargo is not installed or not in PATH"
+    exit 1
+fi
+
+# 1. Format check
+echo "📝 Checking code formatting..."
+if ! cargo fmt --all -- --check; then
+    print_error "Code is not properly formatted. Run 'cargo fmt' to fix."
+    exit 1
+fi
+print_status "Code formatting is correct"
+
+# 2. Clippy linting
+echo "🔍 Running clippy linter..."
+if ! cargo clippy --all-targets --all-features -- -D warnings; then
+    print_error "Clippy found issues. Fix them before committing."
+    exit 1
+fi
+print_status "Clippy checks passed"
+
+# 3. Cargo check
+echo "🔧 Running cargo check..."
+if ! cargo check --all-targets --all-features; then
+    print_error "Cargo check failed. Fix compilation errors before committing."
+    exit 1
+fi
+print_status "Cargo check passed"
+
+# 4. Run tests
+echo "🧪 Running tests..."
+if ! cargo test --quiet; then
+    print_error "Tests failed. Fix failing tests before committing."
+    exit 1
+fi
+print_status "All tests passed"
+
+# 5. Check for TODO/FIXME comments
+echo "📋 Checking for TODO/FIXME comments..."
+if grep -r "TODO\|FIXME\|XXX\|HACK" src/ --include="*.rs" | grep -v "// TODO\|// FIXME\|// XXX\|// HACK"; then
+    print_warning "Found TODO/FIXME comments. Consider addressing them before committing."
+fi
+
+# 6. Check for debug statements
+echo "🐛 Checking for debug statements..."
+if grep -r "dbg!\|println!\|eprintln!" src/ --include="*.rs" | grep -v "// dbg!\|// println!\|// eprintln!"; then
+    print_warning "Found debug statements. Consider removing them before committing."
+fi
+
+# 7. Check for large files
+echo "📏 Checking for large files..."
+if find . -name "*.rs" -size +100k | grep -v target/; then
+    print_warning "Found large files. Consider splitting them."
+fi
+
+# 8. Check for secrets (basic check)
+echo "🔐 Checking for potential secrets..."
+if grep -r "password\|secret\|key\|token" src/ --include="*.rs" | grep -v "// password\|// secret\|// key\|// token" | grep -v "Password\|Secret\|Key\|Token"; then
+    print_warning "Found potential secrets. Make sure they're not hardcoded."
+fi
+
+print_status "All pre-commit checks passed! 🎉"
+echo "Ready to commit."
