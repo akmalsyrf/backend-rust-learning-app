@@ -56,8 +56,8 @@ pub fn advanced_routes() -> Router<AppState> {
         // Notifications routes
         .route("/admin/notifications", get(notifications_handler))
         .route("/admin/notifications/create", get(create_notification_handler))
-        .route("/admin/notifications/:id/mark-read", get(mark_notification_read_handler))
-        .route("/admin/notifications/:id/delete", get(delete_notification_handler))
+        .route("/admin/notifications/{id}/mark-read", get(mark_notification_read_handler))
+        .route("/admin/notifications/{id}/delete", get(delete_notification_handler))
 
         // Export/Import routes
         .route("/admin/export-import", get(export_import_handler))
@@ -73,16 +73,16 @@ pub fn advanced_routes() -> Router<AppState> {
         .route("/admin/file-upload/upload", post(upload_file_handler))
 
         // User Profile routes
-        .route("/admin/users/:id/profile", get(user_profile_handler))
-        .route("/admin/users/:id/edit-profile", get(edit_user_profile_handler))
+        .route("/admin/users/{id}/profile", get(user_profile_handler))
+        .route("/admin/users/{id}/edit-profile", get(edit_user_profile_handler))
 
         // Advanced CRUD Operations routes
         .route("/admin/bulk-operations", get(bulk_operations_form_handler))
         .route("/admin/bulk-operations/execute", get(bulk_operations_handler))
         .route("/admin/user-management", get(user_management_handler))
-        .route("/admin/users/:id/permissions", get(user_permissions_handler))
+        .route("/admin/users/{id}/permissions", get(user_permissions_handler))
         .route("/admin/content-management", get(content_management_handler))
-        .route("/admin/content/:id/versions", get(content_versions_handler))
+        .route("/admin/content/{id}/versions", get(content_versions_handler))
         .route("/admin/data-validation", get(data_validation_handler))
         .route("/admin/audit-logs", get(audit_logging_handler))
 }
